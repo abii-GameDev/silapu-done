@@ -1,0 +1,438 @@
+/* assets/css/admin_style.css */
+:root {
+    --light-green: #8CD790;
+    --dark-green: #5CAB7D;
+    --red: #E74C3C;
+    --yellow: #F1C40F;
+    --white: #FFFFFF;
+    --dark: #333333;
+    --light-gray: #F5F5F5;
+    --sidebar-width: 250px; /* Lebar sidebar */
+    --admin-header-height: 60px; /* Tinggi header atas admin */
+    --primary-blue: #007bff;
+    --secondary-gray: #6c757d;
+    --success-green: #28a745;
+    --danger-red: #dc3545;
+    --warning-yellow: #ffc107;
+    --info-blue: #17a2b8;
+    --text-dark: #343a40;
+    --text-light: #f8f9fa;
+    --border-color: #dee2e6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.admin-body { /* Tambahkan class pada tag body di admin_header.php */
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--light-gray);
+    color: var(--text-dark);
+    font-size: 16px; /* Ukuran font dasar */
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--dark-green);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1000; /* Pastikan di atas konten lain */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.sidebar .sidebar-brand-link { /* Untuk link logo/nama di sidebar */
+    color: var(--white);
+    text-decoration: none;
+    display: block; /* Agar bisa diberi margin/padding */
+    margin-bottom: 30px; /* Jarak dari menu */
+    text-align: center;
+}
+.sidebar .sidebar-brand-link h2 {
+    font-size: 1.6rem; /* Sedikit lebih kecil dari contoh sebelumnya */
+    font-weight: 700;
+    margin: 0; /* Hapus margin default h2 */
+}
+.sidebar .sidebar-brand-link:hover h2 {
+    color: var(--yellow); /* Efek hover sederhana */
+}
+
+
+.sidebar nav a {
+    color: rgba(255, 255, 255, 0.85); /* Sedikit transparan untuk teks link */
+    text-decoration: none;
+    padding: 12px 15px;
+    display: block;
+    border-radius: 5px;
+    margin-bottom: 8px; /* Jarak antar link lebih rapat */
+    font-weight: 500; /* Sedikit lebih ringan */
+    transition: background-color 0.2s ease, color 0.2s ease;
+    display: flex; /* Untuk ikon */
+    align-items: center; /* Untuk ikon */
+}
+.sidebar nav a i { /* Untuk ikon Font Awesome atau sejenisnya */
+    margin-right: 10px;
+    width: 20px; /* Lebar ikon */
+    text-align: center;
+}
+
+.sidebar nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+}
+.sidebar nav a.active {
+    background-color: var(--yellow);
+    color: var(--dark-green);
+    font-weight: 600; /* Lebih tebal untuk link aktif */
+}
+.sidebar nav a.logout-link { /* Style khusus untuk link logout di sidebar */
+    margin-top: 25px; /* Jarak dari menu lain */
+    background-color: rgba(220, 53, 69, 0.8); /* Warna merah dengan opacity */
+    color: var(--white);
+}
+.sidebar nav a.logout-link:hover {
+    background-color: var(--danger-red); /* Merah solid saat hover */
+}
+
+
+/* --- Main Content Area --- */
+.main-content-area { /* Wrapper untuk header atas dan konten utama */
+    margin-left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width)); /* Mengisi sisa lebar */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Pastikan mengisi tinggi layar */
+}
+
+/* Header Atas Admin (Top Bar) */
+.admin-top-header {
+    background-color: var(--white);
+    padding: 0 30px; /* Padding horizontal */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    height: var(--admin-header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Untuk judul di kiri, info user di kanan */
+    position: sticky; /* Agar tetap di atas saat scroll konten */
+    top: 0;
+    z-index: 999; /* Di bawah sidebar tapi di atas konten */
+}
+.admin-top-header h1.page-main-title { /* Untuk judul utama halaman */
+    color: var(--text-dark);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+.admin-top-header .admin-user-info {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+.admin-top-header .admin-user-info span {
+    margin-right: 15px;
+    color: var(--text-dark);
+}
+.admin-top-header .admin-user-info a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+.admin-top-header .admin-user-info a:hover {
+    text-decoration: underline;
+}
+
+
+/* Konten Utama di dalam .main-content-area */
+.page-content { /* Wrapper untuk konten spesifik halaman */
+    padding: 30px;
+    flex-grow: 1; /* Mengisi sisa ruang vertikal */
+    background-color: var(--light-gray); /* Background konten utama, bisa sama dengan body */
+}
+/* Jika menggunakan background image seperti di dashboard.html lama */
+.page-content.with-bg-image { 
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white); /* Fallback jika gambar tidak ada */
+}
+.page-content.with-bg-image::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../images/uinbg.jpg'); /* Pastikan path ini benar */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6) blur(2px); /* Sedikit blur & gelap */
+    z-index: 0;
+    /* Hapus animasi jika tidak diperlukan, atau sesuaikan */
+    /* animation: moveBackground 20s linear infinite; */
+}
+/* @keyframes moveBackground { ... } */
+
+.page-content .content-wrapper { /* Untuk konten di atas background image */
+    position: relative;
+    z-index: 1;
+}
+
+
+/* --- Judul Section Konten --- */
+.page-content .section-title {
+    font-size: 1.8rem; /* Sedikit lebih kecil untuk section di dalam halaman */
+    margin-bottom: 25px;
+    color: var(--dark-green); /* Warna default, bisa di-override per halaman */
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--light-green);
+    text-shadow: none; /* Hapus text-shadow default jika ada */
+}
+/* Jika ingin variasi warna untuk judul di halaman dengan background image */
+.page-content.with-bg-image .section-title {
+    color: var(--white);
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    border-bottom-color: var(--yellow);
+}
+
+
+/* --- Tombol Umum Admin --- */
+.btn-admin {
+    display: inline-block; /* Agar bisa diberi margin/padding */
+    padding: 10px 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+    text-align: center;
+}
+.btn-admin:hover { opacity: 0.85; }
+.btn-admin:active { transform: translateY(1px); }
+
+.btn-admin-primary { background-color: var(--dark-green); color: white; }
+.btn-admin-success { background-color: var(--success-green); color: white; }
+.btn-admin-warning { background-color: var(--warning-yellow); color: var(--text-dark); }
+.btn-admin-danger { background-color: var(--danger-red); color: white; }
+.btn-admin-info { background-color: var(--info-blue); color: white; }
+.btn-admin-secondary { background-color: var(--secondary-gray); color: white; }
+.btn-admin-light { background-color: var(--light-gray); color: var(--text-dark); border: 1px solid var(--border-color); }
+
+
+/* --- Tabel Data --- */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--white); /* Background tabel */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.data-table { /* Beri class pada <table> Anda */
+    width: 100%;
+    border-collapse: collapse; /* Lebih baik dari border-spacing:0 */
+}
+
+.data-table th, 
+.data-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    font-size: 0.9rem; /* Sedikit lebih kecil untuk data tabel */
+    vertical-align: middle; /* Vertikal align default */
+}
+
+.data-table thead th {
+    background-color: var(--light-gray); /* Background header tabel */
+    color: var(--text-dark);
+    font-weight: 600;
+    border-bottom-width: 2px; /* Border bawah header lebih tebal */
+    white-space: nowrap; /* Cegah teks header wrap jika bisa */
+}
+
+.data-table tbody tr:nth-child(even) {
+    background-color: #fdfdfd; /* Zebra striping sangat halus */
+}
+
+.data-table tbody tr:hover {
+    background-color: #f1f1f1; /* Warna hover */
+}
+
+.data-table td .status-badge { /* Untuk styling status */
+    padding: 5px 10px;
+    border-radius: 15px; /* Lebih bulat */
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: capitalize; /* Huruf pertama besar */
+    display: inline-block; /* Agar padding bekerja */
+}
+.data-table td .status-badge.status-disetujui,
+.data-table td .status-badge.status-aktif,
+.data-table td .status-badge.status-selesai { background-color: var(--success-green); }
+
+.data-table td .status-badge.status-menunggu,
+.data-table td .status-badge.status-diproses { background-color: var(--info-blue); }
+
+.data-table td .status-badge.status-ditolak,
+.data-table td .status-badge.status-dibatalkan,
+.data-table td .status-badge.status-nonaktif { background-color: var(--danger-red); }
+
+.data-table td .status-badge.status-ditangguhkan { background-color: var(--warning-yellow); color: var(--text-dark); }
+
+
+.data-table .actions a,
+.data-table .actions button { /* Tombol aksi di tabel */
+    margin-right: 5px;
+    margin-bottom: 5px; /* Untuk mobile agar tidak terlalu rapat */
+    font-size: 0.85rem; /* Lebih kecil */
+    padding: 6px 10px; /* Padding lebih kecil */
+}
+.data-table .actions a:last-child,
+.data-table .actions button:last-child {
+    margin-right: 0;
+}
+
+
+/* --- Form Styling --- */
+.admin-form .form-group {
+    margin-bottom: 20px;
+}
+.admin-form .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+.admin-form .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.admin-form .form-control:focus {
+    border-color: var(--dark-green);
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(92, 171, 125, 0.25); /* Shadow focus */
+}
+.admin-form textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+.admin-form select.form-control {
+    appearance: none; /* Hapus tampilan default select */
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    padding-right: 2.5rem; /* Ruang untuk ikon panah */
+}
+.admin-form .form-control[type="file"] {
+    padding: 8px 12px; /* Sedikit berbeda untuk file input */
+}
+.admin-form .form-control::placeholder {
+    color: #6c757d; /* Warna placeholder */
+    opacity: 1;
+}
+.admin-form small.form-text {
+    display: block;
+    margin-top: 5px;
+    color: var(--secondary-gray);
+    font-size: 0.85rem;
+}
+
+
+/* --- Pesan Feedback --- */
+.message {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-weight: 500;
+}
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+.message.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+}
+.message.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+
+/* --- Responsivitas Sidebar & Konten --- */
+.sidebar-toggle-btn { /* Tombol hamburger untuk sidebar di mobile */
+    display: none; /* Default sembunyi di desktop */
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+@media screen and (max-width: 991px) { /* Tablet dan di bawahnya */
+    .sidebar {
+        left: -100%; /* Sembunyikan sidebar */
+        transition: left 0.3s ease-in-out;
+    }
+    .sidebar.active-mobile { /* Class untuk menampilkan sidebar di mobile */
+        left: 0;
+    }
+    .main-content-area {
+        margin-left: 0; /* Konten mengisi penuh */
+        width: 100%;
+    }
+    .sidebar-toggle-btn {
+        display: block; /* Tampilkan tombol hamburger */
+    }
+    /* Opsi: Overlay saat sidebar mobile aktif */
+    /* .sidebar-overlay.active-mobile { ... } */
+}
+@media screen and (max-width: 768px) { /* Mobile spesifik jika perlu */
+    .admin-top-header {
+        padding: 0 15px;
+    }
+    .page-content {
+        padding: 20px;
+    }
+    .admin-top-header h1.page-main-title {
+        font-size: 1.3rem;
+    }
+    .data-table .actions a,
+    .data-table .actions button {
+        display: block; /* Tombol aksi jadi full width di mobile */
+        width: calc(100% - 10px); /* Kurangi margin */
+        margin-bottom: 8px;
+    }
+    .data-table .actions a:last-child,
+    .data-table .actions button:last-child {
+        margin-bottom: 0;
+    }
+}

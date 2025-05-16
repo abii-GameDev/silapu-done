@@ -1,0 +1,714 @@
+/* Enhanced Navbar Styles for SILAPU Kopma UIN RIL */
+:root {
+  --light-green: #8cd790;
+  --dark-green: #5cab7d;
+  --red: #e74c3c;
+  --yellow: #f1c40f;
+  --white: #ffffff;
+  --dark: #333333;
+  --light-gray: #f5f5f5;
+  --hover-green: #7ac282;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Header & Navbar */
+header {
+  background-color: var(--white);
+  padding: 0;
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  position: relative;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--dark);
+  transition: var(--transition);
+}
+
+.logo img {
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 2px solid var(--light-green);
+  transition: var(--transition);
+}
+
+.logo h1 {
+  color: var(--dark-green);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-left: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo a:hover img {
+  transform: scale(1.05);
+}
+
+/* Cart button */
+.cart-button {
+  position: relative;
+  margin-left: 15px;
+  color: var(--dark-green);
+  text-decoration: none;
+  font-size: 1.4rem;
+  transition: var(--transition);
+}
+
+.cart-button:hover {
+  color: var(--dark);
+  transform: scale(1.1);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: var(--red);
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.nav-links a {
+  color: var(--dark);
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-weight: 500;
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.nav-links a:not(.btn-nav):hover {
+  color: var(--dark-green);
+}
+
+.nav-links a:not(.btn-nav):after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 5px;
+  left: 50%;
+  background-color: var(--dark-green);
+  transition: var(--transition);
+  transform: translateX(-50%);
+}
+
+.nav-links a:not(.btn-nav):hover:after {
+  width: 60%;
+}
+
+/* User greeting */
+.user-greeting {
+  color: var(--dark);
+  padding: 5px 10px;
+  font-weight: 600;
+  margin-left: 15px;
+  white-space: nowrap;
+  background-color: rgba(140, 215, 144, 0.15);
+  border-radius: 20px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+}
+
+/* Buttons */
+.btn-nav {
+  padding: 8px 15px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: var(--transition);
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+}
+
+.btn-green {
+  background-color: var(--dark-green);
+  color: var(--white) !important;
+}
+
+.btn-green:hover {
+  background-color: var(--hover-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-yellow {
+  background-color: var(--yellow);
+  color: var(--dark) !important;
+}
+
+.btn-yellow:hover {
+  background-color: #e6bb0f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Dropdown menu for user options */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: var(--white);
+  min-width: 200px;
+  box-shadow: var(--shadow);
+  z-index: 101;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.dropdown-content a {
+  color: var(--dark);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  transition: var(--transition);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(140, 215, 144, 0.1);
+  transform: none !important;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown .dropdown-toggle {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown .dropdown-toggle i {
+  transition: var(--transition);
+}
+
+.dropdown:hover .dropdown-toggle i {
+  transform: rotate(180deg);
+}
+
+/* Mobile menu hamburger button */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--dark-green);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.hamburger:hover {
+  color: var(--dark);
+}
+
+/* Responsive design */
+@media screen and (max-width: 1100px) {
+  .nav-links {
+    gap: 3px;
+  }
+
+  .nav-links a:not(.btn-nav) {
+    padding: 8px 10px;
+    font-size: 0.9rem;
+  }
+
+  .logo h1 {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .navbar {
+    flex-wrap: wrap;
+  }
+
+  .hamburger {
+    display: block;
+    order: 3;
+  }
+
+  .nav-links {
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: var(--transition);
+    order: 4;
+    padding: 0;
+    margin-top: 0;
+  }
+
+  .nav-links.active {
+    max-height: 500px;
+    padding: 15px 0;
+    margin-top: 10px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-links a {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 1rem;
+  }
+
+  .nav-links a:not(.btn-nav) {
+    border-radius: 0;
+  }
+
+  .nav-links a:not(.btn-nav):after {
+    display: none;
+  }
+
+  .btn-nav {
+    margin: 5px 0 !important;
+    width: 100%;
+    text-align: center;
+  }
+
+  .user-greeting {
+    margin-left: 0;
+    padding: 12px 0;
+    width: 100%;
+    text-align: center;
+    border-radius: 0;
+  }
+
+  .dropdown {
+    width: 100%;
+  }
+
+  .dropdown-content {
+    position: static;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .dropdown-content a {
+    padding-left: 30px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .logo h1 {
+    font-size: 1rem;
+  }
+
+  .logo img {
+    height: 40px;
+    width: 40px;
+  }
+}
+
+
+/* Footer */
+footer {
+  background-color: var(--dark);
+  color: var(--white);
+  padding: 50px 0 20px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-logo h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.footer-logo p {
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-links a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  background-color: var(--light-green);
+  color: var(--dark);
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.social-links svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.social-links a:hover {
+  background-color: var(--yellow);
+  transform: translateY(-3px);
+}
+
+.footer-links h3 {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.footer-links h3::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--yellow);
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 10px;
+}
+
+.footer-links a {
+  color: #bbb;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--light-green);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #444;
+  font-size: 0.9rem;
+  color: #bbb;
+}
+
+
+
+
+.usaha-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.usaha-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Shadow lebih soft */
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.usaha-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.usaha-card-image {
+  height: 200px; /* Atau sesuaikan */
+  background-color: #f0f0f0; /* Warna placeholder jika gambar tidak ada */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* Pastikan gambar tidak keluar dari batas */
+}
+.usaha-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Agar gambar mengisi area tanpa distorsi */
+}
+.usaha-card-image img.placeholder {
+  /* Jika Anda ingin style khusus untuk placeholder */
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  opacity: 0.5;
+}
+
+.usaha-card-content {
+  padding: 20px;
+  flex-grow: 1; /* Agar konten mengisi sisa ruang */
+  display: flex;
+  flex-direction: column; /* Untuk mengatur tombol di bawah */
+}
+
+.usaha-card-content h4 {
+  font-size: 1.3rem;
+  color: var(--dark-green);
+  margin-top: 0; /* Hapus margin atas jika ada */
+  margin-bottom: 8px;
+}
+
+.usaha-card-content .kategori-penjual {
+  /* Buat class baru untuk ini */
+  font-size: 0.85rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.usaha-card-content .deskripsi-singkat {
+  /* Buat class baru */
+  font-size: 0.95rem;
+  color: var(--dark);
+  margin-bottom: 15px;
+  line-height: 1.5;
+  flex-grow: 1; /* Agar deskripsi mengisi ruang sebelum tombol */
+}
+
+.usaha-card-content .btn {
+  /* Style umum untuk tombol di card */
+  background-color: var(--dark-green);
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: auto; /* Mendorong tombol ke bawah */
+  display: inline-block; /* Agar bisa diberi margin */
+  transition: background-color 0.2s ease;
+}
+.usaha-card-content .btn:hover {
+  background-color: var(--light-green);
+  color: var(--dark);
+}
+
+/* Tambahkan ke assets/css/style.css */
+.produk-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(270px, 1fr)
+  ); /* Sedikit lebih kecil dari usaha-card */
+  gap: 20px;
+}
+
+.produk-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease-in-out;
+}
+.produk-card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.produk-card-image {
+  height: 180px;
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.produk-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.produk-card-image img.placeholder {
+  /* Jika Anda ingin style khusus untuk placeholder */
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  opacity: 0.4;
+}
+
+.produk-card-content {
+  padding: 15px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.produk-card-content h5 {
+  font-size: 1.15rem;
+  color: var(--dark);
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.produk-card-content .harga {
+  /* Buat class untuk harga jika perlu styling lebih */
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--dark-green);
+  margin-bottom: 10px;
+}
+.produk-card-content .harga .satuan {
+  /* class untuk satuan */
+  font-size: 0.8rem;
+  color: #777;
+  font-weight: normal;
+}
+
+.produk-card-content .deskripsi-produk {
+  /* Buat class untuk deskripsi produk */
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+.produk-card-content .stok-info {
+  /* class untuk info stok */
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 15px;
+}
+.produk-card-content .stok-info .habis {
+  color: var(--red);
+}
+
+.produk-card-content form {
+  margin-top: auto; /* Mendorong form ke bawah */
+}
+.produk-card-content form .jumlah-input-group {
+  /* class untuk grup input jumlah */
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.produk-card-content form .jumlah-input-group label {
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+.produk-card-content form .jumlah-input-group input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.produk-card-content .btn-keranjang {
+  /* class untuk tombol keranjang */
+  background-color: var(--dark-green);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.produk-card-content .btn-keranjang:hover {
+  background-color: var(--light-green);
+  color: var(--dark);
+}
+.produk-card-content .btn-disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Style untuk halaman checkout, bisa ditambahkan ke assets/css/style.css */
+.checkout-section .container {
+  max-width: 1100px; /* Lebar kontainer bisa disesuaikan */
+}
+
+.checkout-section .form-control {
+  /* Pastikan form-control sudah ada */
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Penting agar padding tidak menambah lebar */
+}
+.checkout-section textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.checkout-section .checkout-form-details,
+.checkout-section .checkout-summary {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.checkout-section .checkout-summary {
+  position: sticky; /* Agar ringkasan tetap terlihat saat scroll */
+  top: 100px; /* Jarak dari atas setelah header (sesuaikan dengan tinggi header) */
+}
+
+@media (max-width: 991px) {
+  /* Tablet dan di bawahnya */
+  .checkout-section form > div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr; /* Stack kolom di layar kecil */
+  }
+  .checkout-section .checkout-summary {
+    position: static; /* Hapus sticky di layar kecil */
+    margin-top: 30px;
+  }
+}
