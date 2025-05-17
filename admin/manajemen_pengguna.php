@@ -21,7 +21,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 require $pathPrefix . 'config/db.php';
 
 // Ambil semua data pengguna dari database
-$sql_users = "SELECT id, username, email, role, created_at FROM users ORDER BY created_at DESC";
+$sql_users = "SELECT id, username, email, role, created_at FROM users ORDER BY created_at ASC";
 $result_users = $conn->query($sql_users);
 
 // Include header admin
@@ -54,28 +54,30 @@ include $pathPrefix . 'includes/admin_header.php';
                 </tr>
             </thead>
             <tbody>
-                <?php while($user = $result_users->fetch_assoc()): ?>
-                    <tr>
-                        <td><?php echo htmlspecialchars($user['id']); ?></td>
-                        <td><?php echo htmlspecialchars($user['username']); ?></td>
-                        <td><?php echo htmlspecialchars($user['email']); ?></td>
-                        <td>
-                            <span class="status-badge <?php 
-                                $role_class = 'status-menunggu'; // Default
-                                if (strtolower($user['role']) == 'admin') $role_class = 'status-disetujui'; // Contoh mapping
-                                elseif (strtolower($user['role']) == 'user') $role_class = 'status-diproses'; // Contoh mapping
-                                echo $role_class;
-                            ?>">
-                                <?php echo htmlspecialchars(ucfirst($user['role'])); ?>
-                            </span>
-                        </td>
-                        <td><?php echo date('d M Y, H:i', strtotime($user['created_at'])); ?></td>
-                        <td class="actions" style="text-align: center;"> <?php // Terapkan class .actions dan text-align ?>
-                            <a href="<?php /* echo $adminPathPrefix; */ ?>edit_pengguna.php?id=<?php echo $user['id']; ?>" class="btn-admin btn-admin-warning btn-sm">Edit</a>
-                            <a href="<?php /* echo $adminPathPrefix; */ ?>hapus_pengguna.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Anda yakin ingin menghapus pengguna ini? Aksi ini mungkin tidak dapat diurungkan.');" class="btn-admin btn-admin-danger btn-sm">Hapus</a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
+<?php 
+$counter = 1;
+while($user = $result_users->fetch_assoc()): ?>
+    <tr>
+        <td><?php echo $counter++; ?></td>
+        <td><?php echo htmlspecialchars($user['username']); ?></td>
+        <td><?php echo htmlspecialchars($user['email']); ?></td>
+        <td>
+            <span class="status-badge <?php 
+                $role_class = 'status-menunggu'; // Default
+                if (strtolower($user['role']) == 'admin') $role_class = 'status-disetujui'; // Contoh mapping
+                elseif (strtolower($user['role']) == 'user') $role_class = 'status-diproses'; // Contoh mapping
+                echo $role_class;
+            ?>">
+                <?php echo htmlspecialchars(ucfirst($user['role'])); ?>
+            </span>
+        </td>
+        <td><?php echo date('d M Y, H:i', strtotime($user['created_at'])); ?></td>
+        <td class="actions" style="text-align: center;"> <?php // Terapkan class .actions dan text-align ?>
+            <a href="<?php /* echo $adminPathPrefix; */ ?>edit_pengguna.php?id=<?php echo $user['id']; ?>" class="btn-admin btn-admin-warning btn-sm">Edit</a>
+            <a href="<?php /* echo $adminPathPrefix; */ ?>hapus_pengguna.php?id=<?php echo $user['id']; ?>" onclick="return confirm('Anda yakin ingin menghapus pengguna ini? Aksi ini mungkin tidak dapat diurungkan.');" class="btn-admin btn-admin-danger btn-sm">Hapus</a>
+        </td>
+    </tr>
+<?php endwhile; ?>
             </tbody>
         </table>
     </div>
