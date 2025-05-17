@@ -19,7 +19,7 @@ $pageTitle = "Konfirmasi Pesanan";
 
  <section class="konfirmasi-section" style="padding: 60px 20px; background-color: #f0fdf4; text-align:center;">
      <div class="container" style="max-width: 700px;">
-         <img src="<?php echo $pathPrefix; ?>assets/images/success_order.png" alt="Pesanan Berhasil" style="max-width: 150px; margin-bottom: 25px;"> <!-- Buat gambar success_order.png -->
+         <img src="<?php echo $pathPrefix; ?>assets/images/pendaftaran_chibi_rmv.png" alt="Pesanan Berhasil" style="max-width: 150px; margin-bottom: 25px;"> <!-- Buat gambar success_order.png -->
          
          <h2 style="font-size: 2.5rem; color: var(--dark-green); margin-bottom: 15px;">Pesanan Anda Berhasil Dibuat!</h2>
          <p style="font-size: 1.2rem; color: var(--dark); margin-bottom: 10px;">
