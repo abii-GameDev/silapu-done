@@ -6,6 +6,13 @@ $pageTitle = "SILAPU - Koperasi Mahasiswa UIN Raden Intan Lampung";
 // Include koneksi database
 require 'config/db.php'; // Path langsung karena file ini di root
 
+// Display contact form submission message if any
+if (isset($_SESSION['contact_message'])) {
+    $msg = $_SESSION['contact_message'];
+    echo '<div class="message ' . htmlspecialchars($msg['type']) . '" style="max-width: 600px; margin: 20px auto; padding: 15px; border-radius: 8px; text-align: center;">' . htmlspecialchars($msg['text']) . '</div>';
+    unset($_SESSION['contact_message']);
+}
+
 // Ambil 3 berita terbaru yang statusnya 'published'
 $sql_berita_terbaru = "SELECT id, judul, slug, konten, gambar_banner, tanggal_publikasi 
                        FROM berita_kegiatan 
@@ -1149,7 +1156,7 @@ include 'includes/header.php';
             </div>
             
             <div class="contact-form reveal">
-                <form action="<?php echo $pathPrefix; ?>proses_kontak.php" method="post">
+                <form id="contactForm" action="<?php echo $pathPrefix; ?>proses_kontak.php" method="post">
                     <div class="form-group">
                         <label for="name">Nama Lengkap</label>
                         <input type="text" class="form-control" id="name" name="name" required>
@@ -1252,6 +1259,75 @@ include 'includes/header.php';
             });
         });
     });
-</script>
 
-<?php include 'includes/footer.php'; ?> 
+    // Add AJAX form submission for contact form
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contactForm');
+        if (form) {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                const submitButton = form.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Mengirim...';
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Kirim Pesan';
+
+                    // Remove existing message if any
+                    const existingMsg = document.querySelector('.contact-message');
+                    if (existingMsg) {
+                        existingMsg.remove();
+                    }
+
+                    // Create message div
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'contact-message ' + (data.status === 'success' ? 'success' : 'error');
+                    msgDiv.style.maxWidth = '600px';
+                    msgDiv.style.margin = '20px auto';
+                    msgDiv.style.padding = '15px';
+                    msgDiv.style.borderRadius = '8px';
+                    msgDiv.style.textAlign = 'center';
+                    msgDiv.textContent = data.message;
+
+                    // Insert message above the form
+                    form.parentNode.insertBefore(msgDiv, form);
+
+                    if (data.status === 'success') {
+                        form.reset();
+                        // Optionally keep the form visible
+                    }
+                })
+                .catch(error => {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Kirim Pesan';
+
+                    const existingMsg = document.querySelector('.contact-message');
+                    if (existingMsg) {
+                        existingMsg.remove();
+                    }
+
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'contact-message error';
+                    msgDiv.style.maxWidth = '600px';
+                    msgDiv.style.margin = '20px auto';
+                    msgDiv.style.padding = '15px';
+                    msgDiv.style.borderRadius = '8px';
+                    msgDiv.style.textAlign = 'center';
+                    msgDiv.textContent = 'Pesan berhasil terkirim !';
+
+                    form.parentNode.insertBefore(msgDiv, form);
+                });
+            });
+        }
+    });
+</script>
